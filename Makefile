@@ -44,3 +44,6 @@ analyse:
 
 tests:
 	php bin/phpunit --testdox
+
+fix:
+	vendor/bin/php-cs-fixer fix
