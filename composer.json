@@ -33,6 +33,7 @@
         "symfony/yaml": "5.3.*"
     },
     "require-dev": {
+        "nunomaduro/patrol": "^1.0",
         "nunomaduro/phpinsights": "^2.0",
         "phpmd/phpmd": "^2.10",
         "phpstan/phpstan": "^1.0",
