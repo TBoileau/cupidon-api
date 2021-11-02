@@ -37,7 +37,8 @@
         "phpstan/phpstan": "^1.0",
         "phpstan/phpstan-doctrine": "^1.0",
         "phpstan/phpstan-symfony": "^1.0",
-        "vimeo/psalm": "^4.11"
+        "vimeo/psalm": "^4.11",
+        "weirdan/doctrine-psalm-plugin": "^2.0"
     },
     "config": {
         "optimize-autoloader": true,
