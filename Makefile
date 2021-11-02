@@ -46,3 +46,7 @@ tests:
 
 fix:
 	vendor/bin/php-cs-fixer fix
+
+deploy:
+	composer install
+	make prepare env=$(env)
