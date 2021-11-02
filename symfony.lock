@@ -1,4 +1,10 @@
 {
+    "amphp/amp": {
+        "version": "v2.6.1"
+    },
+    "amphp/byte-stream": {
+        "version": "v1.8.1"
+    },
     "api-platform/core": {
         "version": "2.6",
         "recipe": {
@@ -36,6 +42,9 @@
     },
     "dealerdirect/phpcodesniffer-composer-installer": {
         "version": "v0.7.1"
+    },
+    "dnoegel/php-xdg-base-dir": {
+        "version": "v0.1.1"
     },
     "doctrine/annotations": {
         "version": "1.13",
@@ -117,6 +126,12 @@
     "doctrine/sql-formatter": {
         "version": "1.1.1"
     },
+    "felixfbecker/advanced-json-rpc": {
+        "version": "v3.2.1"
+    },
+    "felixfbecker/language-server-protocol": {
+        "version": "1.5.1"
+    },
     "fig/link-util": {
         "version": "1.2.0"
     },
@@ -156,8 +171,17 @@
             "config/packages/nelmio_cors.yaml"
         ]
     },
+    "netresearch/jsonmapper": {
+        "version": "v4.0.0"
+    },
+    "nikic/php-parser": {
+        "version": "v4.13.0"
+    },
     "nunomaduro/phpinsights": {
         "version": "v2.0.1"
+    },
+    "openlss/lib-array2xml": {
+        "version": "1.0.0"
     },
     "php-cs-fixer/diff": {
         "version": "v2.0.2"
@@ -215,6 +239,9 @@
     },
     "sebastian/cli-parser": {
         "version": "1.0.1"
+    },
+    "sebastian/diff": {
+        "version": "4.0.4"
     },
     "sebastian/version": {
         "version": "3.0.2"
@@ -472,8 +499,14 @@
     "twig/twig": {
         "version": "v3.3.3"
     },
+    "vimeo/psalm": {
+        "version": "4.11.2"
+    },
     "webmozart/assert": {
         "version": "1.10.0"
+    },
+    "webmozart/path-util": {
+        "version": "2.3.0"
     },
     "willdurand/negotiation": {
         "version": "3.0.0"
