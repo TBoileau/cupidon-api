@@ -1,5 +1,5 @@
 scenario
     name 'Developer'
-    set env "dev"
+    set env "prod"
     visit url('/api/docs')
         expect status_code() == 200
