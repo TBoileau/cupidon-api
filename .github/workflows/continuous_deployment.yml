@@ -20,7 +20,9 @@ jobs:
           script: |
             cd ${{ secrets.SSH_DIRECTORY }}
             git pull origin develop
-            make deploy env=dev
+            DATABASE_URL=mysql://root:${{ secrets.BLACKFIRE_SERVER_ID }}@127.0.0.1:3306/cupidon?serverVersion=8.0 make deploy env=dev
+            composer dump-autoload --no-dev --classmap-authoritative
+            php bin/console c:c --env=prod
       - name: Setup Blackfire via setup-php Action
         uses: shivammathur/setup-php@v2
         with:
