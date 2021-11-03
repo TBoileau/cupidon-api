@@ -38,7 +38,7 @@ final class GraphicStyleCrudController extends AbstractCrudController
      */
     public function configureFields(string $pageName): iterable
     {
-        yield IdField::new('id', 'Identifiant');
+        yield IdField::new('id', 'Identifiant')->hideOnForm();
         yield TextField::new('name', 'Nom');
     }
 }
