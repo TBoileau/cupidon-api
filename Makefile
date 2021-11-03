@@ -1,5 +1,8 @@
 .PHONY: install build analyse phpstan phpinsights phpcpd phpmd tests
 
+profile:
+	blackfire-player run .blackfire.yaml --endpoint=$(endpoint)
+
 install:
 	cp .env.dist .env.$(env).local
 	sed -i -e 's/DATABASE_USER/$(db_user)/' .env.$(env).local

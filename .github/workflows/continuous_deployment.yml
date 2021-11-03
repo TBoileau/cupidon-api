@@ -20,4 +20,18 @@ jobs:
           script: |
             cd ${{ secrets.SSH_DIRECTORY }}
             git pull origin develop
-            make deploy env=dev
+            DATABASE_URL=mysql://root:${{ secrets.BLACKFIRE_SERVER_ID }}@127.0.0.1:3306/cupidon?serverVersion=8.0 make deploy env=dev
+            composer dump-autoload --no-dev --classmap-authoritative
+            php bin/console c:c --env=prod
+      - name: Setup Blackfire via setup-php Action
+        uses: shivammathur/setup-php@v2
+        with:
+          extensions: blackfire, :xdebug
+          tools: blackfire, blackfire-player
+        env:
+          BLACKFIRE_SERVER_ID: ${{ secrets.BLACKFIRE_SERVER_ID }}
+          BLACKFIRE_SERVER_TOKEN: ${{ secrets.BLACKFIRE_SERVER_TOKEN }}
+          BLACKFIRE_CLIENT_ID: ${{ secrets.BLACKFIRE_CLIENT_ID }}
+          BLACKFIRE_CLIENT_TOKEN: ${{ secrets.BLACKFIRE_CLIENT_TOKEN }}
+      - name: Profile
+        run: make profile endpoint=https://cupidon-api.thomas-boileau.dev
