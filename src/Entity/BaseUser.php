@@ -9,6 +9,8 @@ use Doctrine\ORM\Mapping\GeneratedValue;
 use Doctrine\ORM\Mapping\Id;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints\Email;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 abstract class BaseUser implements UserInterface, PasswordAuthenticatedUserInterface
 {
@@ -18,15 +20,19 @@ abstract class BaseUser implements UserInterface, PasswordAuthenticatedUserInter
     protected ?int $id = null;
 
     #[Column(unique: true)]
+    #[NotBlank]
+    #[Email]
     protected string $email;
 
     #[Column]
     protected string $password;
 
     #[Column]
+    #[NotBlank]
     protected string $firstName;
 
     #[Column]
+    #[NotBlank]
     protected string $lastName;
 
     public function getId(): ?int

@@ -13,6 +13,7 @@ use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\ManyToOne;
 use Doctrine\ORM\Mapping\Table;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints\NotNull;
 
 #[Entity]
 #[InheritanceType('SINGLE_TABLE')]
@@ -25,11 +26,13 @@ abstract class User extends BaseUser
     #[ManyToOne(targetEntity: Level::class)]
     #[JoinColumn(nullable: false)]
     #[ApiProperty(readableLink: false, writableLink: false)]
+    #[NotNull]
     protected Level $level;
 
     #[ManyToOne(targetEntity: GraphicStyle::class)]
     #[JoinColumn(nullable: false)]
     #[ApiProperty(readableLink: false, writableLink: false)]
+    #[NotNull]
     protected GraphicStyle $graphicStyle;
 
     public function getLevel(): Level

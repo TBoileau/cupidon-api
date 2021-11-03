@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\GeneratedValue;
 use Doctrine\ORM\Mapping\Id;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 #[ApiResource(
     collectionOperations: ['get'],
@@ -23,6 +24,7 @@ class GraphicStyle
     protected ?int $id = null;
 
     #[Column]
+    #[NotBlank]
     protected string $name;
 
     public function getId(): ?int

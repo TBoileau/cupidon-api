@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use NunoMaduro\PhpInsights\Domain\Insights\Composer\ComposerMustBeValid;
 use NunoMaduro\PhpInsights\Domain\Insights\CyclomaticComplexityIsHigh;
 use NunoMaduro\PhpInsights\Domain\Insights\ForbiddenNormalClasses;
 use NunoMaduro\PhpInsights\Domain\Sniffs\ForbiddenSetterSniff;
@@ -68,6 +69,7 @@ return [
     ],
 
     'remove' => [
+        ComposerMustBeValid::class
     ],
 
     'config' => [
@@ -107,6 +109,7 @@ return [
         UnusedParameterSniff::class => [
             'exclude' => [
                 'src/DataPersister/UserDataPersister.php',
+                'src/Controller/Admin/GraphicStyleCrudController.php',
             ],
         ],
         ReturnAssignmentFixer::class => [
