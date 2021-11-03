@@ -69,13 +69,20 @@ return [
     'config' => [
         ForbiddenSetterSniff::class => [
             'exclude' => [
-                'src/Entity/User'
-            ]
+                'src/Entity/GraphicStyle',
+                'src/Entity/Designer',
+                'src/Entity/Developer',
+                'src/Entity/Level',
+                'src/Entity/User',
+            ],
         ],
         ForbiddenNormalClasses::class => [
             'exclude' => [
-                'src/Entity/User'
-            ]
+                'src/Entity/GraphicStyle',
+                'src/Entity/Designer',
+                'src/Entity/Developer',
+                'src/Entity/Level',
+            ],
         ],
         LineLengthSniff::class => [
             'lineLimit' => 120,

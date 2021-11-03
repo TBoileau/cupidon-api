@@ -11,6 +11,8 @@ use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\GeneratedValue;
 use Doctrine\ORM\Mapping\Id;
 use Doctrine\ORM\Mapping\InheritanceType;
+use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\ManyToOne;
 use Doctrine\ORM\Mapping\Table;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -27,13 +29,27 @@ abstract class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Id]
     #[Column(type: 'integer')]
     #[GeneratedValue]
-    private ?int $id = null;
+    protected ?int $id = null;
 
     #[Column(unique: true)]
-    private string $email;
+    protected string $email;
 
     #[Column]
-    private string $password;
+    protected string $password;
+
+    #[Column]
+    protected string $firstName;
+
+    #[Column]
+    protected string $lastName;
+
+    #[ManyToOne(targetEntity: Level::class)]
+    #[JoinColumn(nullable: false)]
+    protected Level $level;
+
+    #[ManyToOne(targetEntity: GraphicStyle::class)]
+    #[JoinColumn(nullable: false)]
+    protected GraphicStyle $graphicStyle;
 
     public function getId(): ?int
     {
@@ -58,6 +74,46 @@ abstract class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPassword(string $password): void
     {
         $this->password = $password;
+    }
+
+    public function getFirstName(): string
+    {
+        return $this->firstName;
+    }
+
+    public function setFirstName(string $firstName): void
+    {
+        $this->firstName = $firstName;
+    }
+
+    public function getLastName(): string
+    {
+        return $this->lastName;
+    }
+
+    public function setLastName(string $lastName): void
+    {
+        $this->lastName = $lastName;
+    }
+
+    public function getLevel(): Level
+    {
+        return $this->level;
+    }
+
+    public function setLevel(Level $level): void
+    {
+        $this->level = $level;
+    }
+
+    public function getGraphicStyle(): GraphicStyle
+    {
+        return $this->graphicStyle;
+    }
+
+    public function setGraphicStyle(GraphicStyle $graphicStyle): void
+    {
+        $this->graphicStyle = $graphicStyle;
     }
 
     /**
