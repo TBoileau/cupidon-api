@@ -128,8 +128,51 @@ final class GraphicStyleTest extends WebTestCase
 
         $client->followRedirect();
 
-        $graphicStyle = $entityManager->find(GraphicStyle::class, 3);
+        $graphicStyle = $entityManager->getRepository(GraphicStyle::class)->findBy([], ['id' => 'desc'])[0];
 
         $this->assertEquals('Nouveau', $graphicStyle->getName());
+    }
+
+    public function testIfGraphicStyleIsDeleted(): void
+    {
+        $client = static::createClient();
+
+        /** @var EntityManagerInterface $entityManager */
+        $entityManager = $client->getContainer()->get('doctrine.orm.entity_manager');
+
+        $graphicStyle = new GraphicStyle();
+        $graphicStyle->setName('Nouveau');
+        $entityManager->persist($graphicStyle);
+        $entityManager->flush();
+
+        /** @var AdminUrlGenerator $adminUrlGenerator */
+        $adminUrlGenerator = $client->getContainer()->get(AdminUrlGenerator::class);
+
+        $client->loginUser($entityManager->find(Administrator::class, 1), 'admin');
+
+        $crawler = $client->request(
+            'GET',
+            $adminUrlGenerator
+                ->setController(GraphicStyleCrudController::class)
+                ->setAction(Action::DETAIL)
+                ->setEntityId($graphicStyle->getId())
+                ->generateUrl()
+        );
+
+        $client->request(
+            'POST',
+            $adminUrlGenerator
+                ->setController(GraphicStyleCrudController::class)
+                ->setAction(Action::DELETE)
+                ->setEntityId($graphicStyle->getId())
+                ->generateUrl(),
+            ['token' => $crawler->filter('form#delete-form input')->attr('value')]
+        );
+
+        $this->assertResponseRedirects();
+
+        $client->followRedirect();
+
+        $this->assertNull($entityManager->find(GraphicStyle::class, $graphicStyle->getId()));
     }
 }
