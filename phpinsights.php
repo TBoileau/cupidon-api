@@ -5,6 +5,7 @@ declare(strict_types=1);
 use NunoMaduro\PhpInsights\Domain\Insights\CyclomaticComplexityIsHigh;
 use NunoMaduro\PhpInsights\Domain\Insights\ForbiddenNormalClasses;
 use NunoMaduro\PhpInsights\Domain\Sniffs\ForbiddenSetterSniff;
+use PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis\UselessOverridingMethodSniff;
 use PHP_CodeSniffer\Standards\Generic\Sniffs\Files\LineLengthSniff;
 use PhpCsFixer\Fixer\ReturnNotation\ReturnAssignmentFixer;
 use SlevomatCodingStandard\Sniffs\Functions\UnusedParameterSniff;
@@ -77,6 +78,13 @@ return [
                 'src/Entity/Developer',
                 'src/Entity/Level',
                 'src/Entity/User',
+                'src/Entity/Administrator',
+                'src/Entity/BaseUser',
+            ],
+        ],
+        UselessOverridingMethodSniff::class => [
+            'exclude' => [
+                'src/Controller/Admin/DashboardController',
             ],
         ],
         ForbiddenNormalClasses::class => [
@@ -85,6 +93,7 @@ return [
                 'src/Entity/Designer',
                 'src/Entity/Developer',
                 'src/Entity/Level',
+                'src/Entity/Administrator',
             ],
         ],
         LineLengthSniff::class => [
