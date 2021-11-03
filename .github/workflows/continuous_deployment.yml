@@ -34,4 +34,4 @@ jobs:
           BLACKFIRE_CLIENT_ID: ${{ secrets.BLACKFIRE_CLIENT_ID }}
           BLACKFIRE_CLIENT_TOKEN: ${{ secrets.BLACKFIRE_CLIENT_TOKEN }}
       - name: Profile
-        run: make profile endpoint=https://cupidon-api.thomas-boileau.dev
+        run: blackfire-player run .blackfire.yaml --endpoint=https://cupidon-api.thomas-boileau.dev
