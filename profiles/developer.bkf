@@ -1,0 +1,5 @@
+scenario
+    name 'Developer'
+    set env "dev"
+    visit url('/api/docs')
+        expect status_code() == 200

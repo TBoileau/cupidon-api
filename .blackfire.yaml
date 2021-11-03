@@ -1,0 +1,15 @@
+tests:
+  "Pages should be fast enough":
+    path: "/.*"
+    assertions:
+      - "main.wall_time < 20ms"
+      - "metrics.sql.queries.count < 5"
+
+scenarios: |
+  #!blackfire-player
+  name 'Cupidon'
+  load "profiles/*.bkf"
+
+recommendations:
+  symfony.avoid_dot_env_parsing:
+    enabled: true
