@@ -8,7 +8,7 @@ use ApiPlatform\Core\Bridge\Symfony\Bundle\Test\ApiTestCase;
 
 final class LoginTest extends ApiTestCase
 {
-    public function testIfLoginReturnToken(): void
+    public function testIfLoginReturnsToken(): void
     {
         $response = static::createClient()->request(
             'GET',
@@ -16,8 +16,8 @@ final class LoginTest extends ApiTestCase
             [
                 'json' => [
                     'email' => 'developer+1@email.com',
-                    'password' => 'password'
-                ]
+                    'password' => 'password',
+                ],
             ]
         );
 

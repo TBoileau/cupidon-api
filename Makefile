@@ -9,7 +9,7 @@ install:
 	sed -i -e 's/DATABASE_PASSWORD/$(db_password)/' .env.$(env).local
 	composer install
 	make prepare env=$(env)
-	php bin/console lexik:jwt:generate-keypair
+	php bin/console lexik:jwt:generate-keypair --overwrite --quiet --env $(env)
 
 composer:
 	composer valid
