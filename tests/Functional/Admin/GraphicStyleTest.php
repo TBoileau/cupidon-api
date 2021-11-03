@@ -88,7 +88,7 @@ final class GraphicStyleTest extends WebTestCase
         );
 
         $client->submitForm('Sauvegarder les modifications', [
-            'GraphicStyle[name]' => 'Modifié'
+            'GraphicStyle[name]' => 'Modifié',
         ]);
 
         $this->assertResponseRedirects();
@@ -121,7 +121,7 @@ final class GraphicStyleTest extends WebTestCase
         );
 
         $client->submitForm('Créer', [
-            'GraphicStyle[name]' => 'Nouveau'
+            'GraphicStyle[name]' => 'Nouveau',
         ]);
 
         $this->assertResponseRedirects();
