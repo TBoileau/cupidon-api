@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiProperty;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\DiscriminatorColumn;
 use Doctrine\ORM\Mapping\DiscriminatorMap;
@@ -45,10 +46,12 @@ abstract class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ManyToOne(targetEntity: Level::class)]
     #[JoinColumn(nullable: false)]
+    #[ApiProperty(readableLink: false, writableLink: false)]
     protected Level $level;
 
     #[ManyToOne(targetEntity: GraphicStyle::class)]
     #[JoinColumn(nullable: false)]
+    #[ApiProperty(readableLink: false, writableLink: false)]
     protected GraphicStyle $graphicStyle;
 
     public function getId(): ?int

@@ -21,8 +21,3 @@ security:
                 success_handler: lexik_jwt_authentication.handler.authentication_success
                 failure_handler: lexik_jwt_authentication.handler.authentication_failure
             jwt: ~
-
-    access_control:
-         - { path: ^/api/docs, roles: PUBLIC_ACCESS }
-         - { path: ^/api/login, roles: PUBLIC_ACCESS }
-         - { path: ^/api, roles: IS_AUTHENTICATED_FULLY }
