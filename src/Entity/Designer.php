@@ -11,6 +11,7 @@ use Doctrine\ORM\Mapping\Entity;
     collectionOperations: [
         'post' => [
             'security' => "is_granted('PUBLIC_ACCESS')",
+            'output' => false,
         ],
     ],
     itemOperations: ['get'],
