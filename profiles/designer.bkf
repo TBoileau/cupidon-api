@@ -11,12 +11,9 @@ scenario
         param graphicStyle "/api/graphic_styles/1"
         json true
         expect status_code() == 201
-        assert metrics.sql.queries.count == 7
-        assert main.wall_time < 800ms
     visit url('/api/login_check')
         method 'POST'
         param email "designer+2@email.com"
         param password "password"
         json true
         expect status_code() == 200
-        assert main.wall_time < 600ms
