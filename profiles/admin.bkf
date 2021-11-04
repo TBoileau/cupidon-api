@@ -1,0 +1,5 @@
+scenario
+    name 'Admin'
+    set env "prod"
+    visit url('/api/docs')
+        expect status_code() == 200
