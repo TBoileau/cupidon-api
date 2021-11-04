@@ -1,11 +1,11 @@
 scenario
-    name 'Developer'
+    name 'Designer'
     set env "prod"
-    visit url('/api/developers')
+    visit url('/api/designers')
         method 'POST'
-        param email "developer+2@email.com"
+        param email "designer+2@email.com"
         param password "password"
-        param firstName "John"
+        param firstName "Jane"
         param lastName "Doe"
         param level "/api/levels/1"
         param graphicStyle "/api/graphic_styles/1"
@@ -15,7 +15,7 @@ scenario
         assert main.wall_time < 800ms
     visit url('/api/login_check')
         method 'POST'
-        param email "developer+2@email.com"
+        param email "designer+2@email.com"
         param password "password"
         json true
         expect status_code() == 200

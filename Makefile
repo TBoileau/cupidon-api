@@ -1,7 +1,8 @@
 .PHONY: install build analyse phpstan phpinsights phpcpd phpmd tests
 
 profile:
-	blackfire-player run .blackfire.yaml --endpoint=$(endpoint)
+	make prepare env=$(env)
+	blackfire-player run .blackfire.yaml --endpoint=$(endpoint) --blackfire-env=cupidon
 
 install:
 	cp .env.dist .env.$(env).local
