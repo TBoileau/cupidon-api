@@ -30,6 +30,7 @@ abstract class BaseUser implements UserInterface, PasswordAuthenticatedUserInter
     protected string $password;
 
     #[Groups(['register'])]
+    #[NotBlank(groups: ['register'])]
     protected ?string $plainPassword = null;
 
     #[Column]

@@ -13,6 +13,7 @@ use Doctrine\ORM\Mapping\Entity;
         'post' => [
             'security' => "is_granted('PUBLIC_ACCESS')",
             'denormalization_context' => ['groups' => 'register'],
+            'validation_groups' => ['Default', 'register'],
             'output' => false,
         ],
         'profile' => [
