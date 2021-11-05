@@ -12,13 +12,13 @@ trait AuthenticatedClientTrait
     {
         $token = static::createClient()->request('POST', '/api/login_check', ['json' => [
             'email' => $email,
-            'password' => 'password'
+            'password' => 'password',
         ]])->toArray()['token'];
 
         return static::createClient([], [
             'headers' => [
-                'Authorization' => sprintf('Bearer %s', $token)
-            ]
+                'Authorization' => sprintf('Bearer %s', $token),
+            ],
         ]);
     }
 }
