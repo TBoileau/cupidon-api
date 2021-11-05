@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiProperty;
+use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\DiscriminatorColumn;
 use Doctrine\ORM\Mapping\DiscriminatorMap;
 use Doctrine\ORM\Mapping\Entity;
@@ -14,7 +15,9 @@ use Doctrine\ORM\Mapping\ManyToOne;
 use Doctrine\ORM\Mapping\Table;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\NotNull;
+use Symfony\Component\Validator\Constraints\Url;
 
 #[Entity]
 #[InheritanceType('SINGLE_TABLE')]
@@ -37,6 +40,21 @@ abstract class User extends BaseUser
     #[NotNull]
     #[Groups(['profile', 'register'])]
     protected GraphicStyle $graphicStyle;
+
+    #[Column(type: 'text')]
+    #[NotBlank]
+    #[Groups(['profile', 'register'])]
+    protected string $description;
+
+    #[Column(nullable: true)]
+    #[Url]
+    #[Groups(['profile', 'register'])]
+    protected ?string $linkedIn = null;
+
+    #[Column(nullable: true)]
+    #[Url]
+    #[Groups(['profile', 'register'])]
+    protected ?string $twitter = null;
 
     public function getLevel(): Level
     {
@@ -64,5 +82,35 @@ abstract class User extends BaseUser
     public function getRoles(): array
     {
         return ['ROLE_USER'];
+    }
+
+    public function getDescription(): string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): void
+    {
+        $this->description = $description;
+    }
+
+    public function getLinkedIn(): ?string
+    {
+        return $this->linkedIn;
+    }
+
+    public function setLinkedIn(?string $linkedIn): void
+    {
+        $this->linkedIn = $linkedIn;
+    }
+
+    public function getTwitter(): ?string
+    {
+        return $this->twitter;
+    }
+
+    public function setTwitter(?string $twitter): void
+    {
+        $this->twitter = $twitter;
     }
 }
