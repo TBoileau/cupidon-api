@@ -7,6 +7,9 @@ scenario
         param plainPassword "password"
         param firstName "John"
         param lastName "Doe"
+        param description "Small description"
+        param twitter "https://www.twitter.com"
+        param linkedIn "https://www.linkedin.com"
         param level "/api/levels/1"
         param graphicStyle "/api/graphic_styles/1"
         json true
@@ -24,6 +27,9 @@ scenario
         param email "developer+3@email.com"
         param firstName "John"
         param lastName "Doe"
+        param description "Small description"
+        param twitter "https://www.twitter.com"
+        param linkedIn "https://www.linkedin.com"
         param level "/api/levels/1"
         param graphicStyle "/api/graphic_styles/1"
         json true
