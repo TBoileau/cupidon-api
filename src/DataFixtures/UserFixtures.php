@@ -31,6 +31,9 @@ final class UserFixtures extends Fixture
         $developer->setFirstName('John');
         $developer->setLastName('Doe');
         $developer->setEmail('developer+1@email.com');
+        $developer->setDescription('Small description');
+        $developer->setTwitter('https://www.twitter.com');
+        $developer->setLinkedIn('https://www.linkedin.com');
         $developer->setPassword($this->userPasswordHasher->hashPassword($developer, 'password'));
 
         /** @var Level $level */
@@ -50,6 +53,9 @@ final class UserFixtures extends Fixture
         $designer->setFirstName('Jane');
         $designer->setLastName('Doe');
         $designer->setEmail('designer+1@email.com');
+        $designer->setDescription('Small description');
+        $designer->setTwitter('https://www.twitter.com');
+        $designer->setLinkedIn('https://www.linkedin.com');
         $designer->setPassword($this->userPasswordHasher->hashPassword($designer, 'password'));
 
         /** @var Level $level */
