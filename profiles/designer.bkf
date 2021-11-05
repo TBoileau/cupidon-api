@@ -10,7 +10,7 @@ scenario
         param level "/api/levels/1"
         param graphicStyle "/api/graphic_styles/1"
         json true
-        expect status_code() == 201
+        expect status_code() == 204
     visit url('/api/login_check')
         method 'POST'
         param email "designer+2@email.com"
