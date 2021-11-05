@@ -28,14 +28,14 @@ abstract class User extends BaseUser
     #[JoinColumn(nullable: false)]
     #[ApiProperty(readableLink: false, writableLink: false)]
     #[NotNull]
-    #[Groups(['profile'])]
+    #[Groups(['profile', 'register'])]
     protected Level $level;
 
     #[ManyToOne(targetEntity: GraphicStyle::class)]
     #[JoinColumn(nullable: false)]
     #[ApiProperty(readableLink: false, writableLink: false)]
     #[NotNull]
-    #[Groups(['profile'])]
+    #[Groups(['profile', 'register'])]
     protected GraphicStyle $graphicStyle;
 
     public function getLevel(): Level

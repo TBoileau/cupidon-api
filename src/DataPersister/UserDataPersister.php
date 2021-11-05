@@ -31,7 +31,9 @@ final class UserDataPersister implements ContextAwareDataPersisterInterface
      */
     public function persist($data, array $context = []): User
     {
-        $data->setPassword($this->userPasswordHasher->hashPassword($data, $data->getPassword()));
+        if (null !== $data->getPlainPassword()) {
+            $data->setPassword($this->userPasswordHasher->hashPassword($data, $data->getPlainPassword()));
+        }
 
         /** @var User $user */
         $user = $this->decorated->persist($data, $context);

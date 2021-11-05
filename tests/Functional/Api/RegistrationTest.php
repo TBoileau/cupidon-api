@@ -18,7 +18,7 @@ final class RegistrationTest extends ApiTestCase
             [
                 'json' => [
                     'email' => 'designer+2@email.com',
-                    'password' => 'password',
+                    'plainPassword' => 'password',
                     'firstName' => 'John',
                     'lastName' => 'Doe',
                     'level' => $this->findIriBy(Level::class, ['id' => 1]),
@@ -38,7 +38,7 @@ final class RegistrationTest extends ApiTestCase
             [
                 'json' => [
                     'email' => 'developer+2@email.com',
-                    'password' => 'password',
+                    'plainPassword' => 'password',
                     'firstName' => 'John',
                     'lastName' => 'Doe',
                     'level' => $this->findIriBy(Level::class, ['id' => 1]),

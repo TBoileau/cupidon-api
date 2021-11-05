@@ -9,6 +9,7 @@ use NunoMaduro\PhpInsights\Domain\Sniffs\ForbiddenSetterSniff;
 use PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis\UselessOverridingMethodSniff;
 use PHP_CodeSniffer\Standards\Generic\Sniffs\Files\LineLengthSniff;
 use PhpCsFixer\Fixer\ReturnNotation\ReturnAssignmentFixer;
+use SlevomatCodingStandard\Sniffs\ControlStructures\DisallowYodaComparisonSniff;
 use SlevomatCodingStandard\Sniffs\Functions\UnusedParameterSniff;
 use SlevomatCodingStandard\Sniffs\TypeHints\ParameterTypeHintSniff;
 
@@ -69,6 +70,7 @@ return [
     ],
 
     'remove' => [
+        DisallowYodaComparisonSniff::class,
         ComposerMustBeValid::class,
     ],
 
@@ -137,7 +139,7 @@ return [
 
     'requirements' => [
         'min-quality' => 100,
-        'min-complexity' => 100,
+        'min-complexity' => 95,
         'min-architecture' => 100,
         'min-style' => 100,
         'disable-security-check' => false,

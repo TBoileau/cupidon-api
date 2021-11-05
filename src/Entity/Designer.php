@@ -12,6 +12,7 @@ use Doctrine\ORM\Mapping\Entity;
     collectionOperations: [
         'post' => [
             'security' => "is_granted('PUBLIC_ACCESS')",
+            'denormalization_context' => ['groups' => 'register'],
             'output' => false,
         ],
         'profile' => [

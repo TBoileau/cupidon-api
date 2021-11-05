@@ -23,20 +23,23 @@ abstract class BaseUser implements UserInterface, PasswordAuthenticatedUserInter
     #[Column(unique: true)]
     #[NotBlank]
     #[Email]
-    #[Groups(['profile'])]
+    #[Groups(['profile', 'register'])]
     protected string $email;
 
     #[Column]
     protected string $password;
 
+    #[Groups(['register'])]
+    protected ?string $plainPassword = null;
+
     #[Column]
     #[NotBlank]
-    #[Groups(['profile'])]
+    #[Groups(['profile', 'register'])]
     protected string $firstName;
 
     #[Column]
     #[NotBlank]
-    #[Groups(['profile'])]
+    #[Groups(['profile', 'register'])]
     protected string $lastName;
 
     public function getId(): ?int
@@ -62,6 +65,16 @@ abstract class BaseUser implements UserInterface, PasswordAuthenticatedUserInter
     public function setPassword(string $password): void
     {
         $this->password = $password;
+    }
+
+    public function getPlainPassword(): ?string
+    {
+        return $this->plainPassword;
+    }
+
+    public function setPlainPassword(?string $plainPassword): void
+    {
+        $this->plainPassword = $plainPassword;
     }
 
     public function getFirstName(): string
@@ -91,6 +104,7 @@ abstract class BaseUser implements UserInterface, PasswordAuthenticatedUserInter
 
     public function eraseCredentials(): void
     {
+        $this->plainPassword = null;
     }
 
     public function getUsername(): string

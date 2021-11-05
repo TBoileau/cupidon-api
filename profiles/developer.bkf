@@ -4,7 +4,7 @@ scenario
     visit url('/api/developers')
         method 'POST'
         param email "developer+2@email.com"
-        param password "password"
+        param plainPassword "password"
         param firstName "John"
         param lastName "Doe"
         param level "/api/levels/1"
