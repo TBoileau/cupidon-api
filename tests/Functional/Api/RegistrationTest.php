@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace App\Tests\Functional\Api;
 
 use ApiPlatform\Core\Bridge\Symfony\Bundle\Test\ApiTestCase;
-use App\Entity\Designer;
-use App\Entity\Developer;
 use App\Entity\GraphicStyle;
 use App\Entity\Level;
 
@@ -29,8 +27,7 @@ final class RegistrationTest extends ApiTestCase
             ]
         );
 
-        $this->assertResponseIsSuccessful();
-        $this->assertMatchesResourceItemJsonSchema(Designer::class);
+        $this->assertResponseStatusCodeSame(204);
     }
 
     public function testIfDeveloperIsRegistered(): void
@@ -50,7 +47,6 @@ final class RegistrationTest extends ApiTestCase
             ]
         );
 
-        $this->assertResponseIsSuccessful();
-        $this->assertMatchesResourceItemJsonSchema(Developer::class);
+        $this->assertResponseStatusCodeSame(204);
     }
 }

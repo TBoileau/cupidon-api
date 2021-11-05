@@ -10,6 +10,6 @@ api_platform:
         versions: [3]
         api_keys:
             apiKey:
-                name: Autorization
+                name: Authorization
                 type: header
 

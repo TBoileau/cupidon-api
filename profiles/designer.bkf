@@ -10,10 +10,21 @@ scenario
         param level "/api/levels/1"
         param graphicStyle "/api/graphic_styles/1"
         json true
-        expect status_code() == 201
+        expect status_code() == 204
     visit url('/api/login_check')
         method 'POST'
         param email "designer+2@email.com"
         param password "password"
         json true
         expect status_code() == 200
+        set token json('token')
+    visit url('/api/designers/profile')
+        header "Authorization: Bearer " ~ token
+        method 'POST'
+        param email "designer+3@email.com"
+        param firstName "John"
+        param lastName "Doe"
+        param level "/api/levels/1"
+        param graphicStyle "/api/graphic_styles/1"
+        json true
+        expect status_code() == 204

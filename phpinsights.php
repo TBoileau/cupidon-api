@@ -69,7 +69,7 @@ return [
     ],
 
     'remove' => [
-        ComposerMustBeValid::class
+        ComposerMustBeValid::class,
     ],
 
     'config' => [
