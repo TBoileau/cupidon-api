@@ -22,6 +22,9 @@ final class DesignerTest extends ApiTestCase
             'email' => 'designer+2@email.com',
             'firstName' => 'John',
             'lastName' => 'Doe',
+            'description' => 'Small description',
+            'linkedIn' => 'https://www.linkedin.com',
+            'twitter' => 'https://www.twitter.com',
             'level' => $this->findIriBy(Level::class, ['id' => 1]),
             'graphicStyle' => $this->findIriBy(GraphicStyle::class, ['id' => 1]),
         ]]);
