@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Controller\Admin;
 
 use App\Entity\GraphicStyle;
+use App\Entity\Level;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Contracts\Menu\MenuItemInterface;
@@ -32,5 +33,6 @@ final class DashboardController extends AbstractDashboardController
     {
         yield MenuItem::linktoDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linkToCrud('Styles graphiques', 'fa fa-picture-o', GraphicStyle::class);
+        yield MenuItem::linkToCrud('Niveau d\'expérience', 'fa fa-briefcase', Level::class);
     }
 }
