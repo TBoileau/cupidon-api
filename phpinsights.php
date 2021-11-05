@@ -73,7 +73,7 @@ return [
     'remove' => [
         DisallowYodaComparisonSniff::class,
         ComposerMustBeValid::class,
-        SuperfluousAbstractClassNamingSniff::class
+        SuperfluousAbstractClassNamingSniff::class,
     ],
 
     'config' => [
