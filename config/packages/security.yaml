@@ -16,9 +16,9 @@ security:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
-        api:
+        login:
             stateless: true
-            pattern: ^/api
+            pattern: ^/api/login_check
             provider: doctrine_user
             json_login:
                 check_path: /api/login_check
@@ -26,6 +26,10 @@ security:
                 password_path: password
                 success_handler: lexik_jwt_authentication.handler.authentication_success
                 failure_handler: lexik_jwt_authentication.handler.authentication_failure
+        api:
+            stateless: true
+            pattern: ^/api
+            provider: doctrine_user
             jwt: ~
         admin:
             pattern: ^/admin

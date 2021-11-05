@@ -13,6 +13,7 @@ use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\ManyToOne;
 use Doctrine\ORM\Mapping\Table;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints\NotNull;
 
 #[Entity]
@@ -20,19 +21,21 @@ use Symfony\Component\Validator\Constraints\NotNull;
 #[DiscriminatorColumn(name: 'discr', type: 'string')]
 #[DiscriminatorMap(['designer' => Designer::class, 'developer' => Developer::class])]
 #[Table(name: '`user`')]
-#[UniqueEntity(fields: 'email')]
+#[UniqueEntity(fields: 'email', entityClass: User::class, repositoryMethod: 'findByEmail')]
 abstract class User extends BaseUser
 {
     #[ManyToOne(targetEntity: Level::class)]
     #[JoinColumn(nullable: false)]
     #[ApiProperty(readableLink: false, writableLink: false)]
     #[NotNull]
+    #[Groups(['profile'])]
     protected Level $level;
 
     #[ManyToOne(targetEntity: GraphicStyle::class)]
     #[JoinColumn(nullable: false)]
     #[ApiProperty(readableLink: false, writableLink: false)]
     #[NotNull]
+    #[Groups(['profile'])]
     protected GraphicStyle $graphicStyle;
 
     public function getLevel(): Level
