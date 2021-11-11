@@ -11,6 +11,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 final class GraphicStyleTest extends WebTestCase
 {
@@ -63,7 +64,7 @@ final class GraphicStyleTest extends WebTestCase
         $this->assertResponseIsSuccessful();
 
         $this->assertStringContainsString('1', $crawler->filter('dl.datalist div:first-child dd')->text());
-        $this->assertStringContainsString('Flat design', $crawler->filter('dl.datalist div:last-child dd')->text());
+        $this->assertStringContainsString('Retro', $crawler->filter('dl.datalist div:nth-child(2) dd')->text());
     }
 
     public function testIfGraphicStyleIsUpdated(): void
@@ -89,6 +90,13 @@ final class GraphicStyleTest extends WebTestCase
 
         $client->submitForm('Sauvegarder les modifications', [
             'GraphicStyle[name]' => 'Modifié',
+            'GraphicStyle[file][file]' => new UploadedFile(
+                __DIR__.'/../../../public/uploads/graphic_styles/image.png',
+                'image.png',
+                'image/png',
+                null,
+                true
+            ),
         ]);
 
         $this->assertResponseRedirects();
@@ -122,6 +130,13 @@ final class GraphicStyleTest extends WebTestCase
 
         $client->submitForm('Créer', [
             'GraphicStyle[name]' => 'Nouveau',
+            'GraphicStyle[file][file]' => new UploadedFile(
+                __DIR__.'/../../../public/uploads/graphic_styles/image.png',
+                'image.png',
+                'image/png',
+                null,
+                true
+            ),
         ]);
 
         $this->assertResponseRedirects();

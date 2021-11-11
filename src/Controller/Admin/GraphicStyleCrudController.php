@@ -11,10 +11,16 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Contracts\Field\FieldInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 final class GraphicStyleCrudController extends AbstractCrudController
 {
+    public function __construct(private string $graphicStyleDir)
+    {
+    }
+
     public static function getEntityFqcn(): string
     {
         return GraphicStyle::class;
@@ -40,5 +46,7 @@ final class GraphicStyleCrudController extends AbstractCrudController
     {
         yield IdField::new('id', 'Identifiant')->hideOnForm();
         yield TextField::new('name', 'Nom');
+        yield TextField::new('file', 'Image')->setFormType(VichImageType::class)->onlyOnForms();
+        yield ImageField::new('filename', 'Image')->setBasePath($this->graphicStyleDir)->hideOnForm();
     }
 }
