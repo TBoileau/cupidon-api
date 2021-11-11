@@ -49,14 +49,17 @@ final class DesignerTest extends WebTestCase
         /** @var AdminUrlGenerator $adminUrlGenerator */
         $adminUrlGenerator = $client->getContainer()->get(AdminUrlGenerator::class);
 
+        /** @var Designer $developer */
+        $designer = $entityManager->getRepository(Designer::class)->findOneBy([]);
+
         $client->loginUser($entityManager->find(Administrator::class, 1), 'admin');
 
-        $crawler = $client->request(
+        $client->request(
             'GET',
             $adminUrlGenerator
                 ->setController(DesignerCrudController::class)
                 ->setAction(Action::DETAIL)
-                ->setEntityId(1)
+                ->setEntityId($designer->getId())
                 ->generateUrl()
         );
 
@@ -70,7 +73,8 @@ final class DesignerTest extends WebTestCase
         /** @var EntityManagerInterface $entityManager */
         $entityManager = $client->getContainer()->get('doctrine.orm.entity_manager');
 
-        $graphicStyle = $entityManager->getRepository(Designer::class)->findOneBy([]);
+        /** @var Designer $developer */
+        $designer = $entityManager->getRepository(Designer::class)->findOneBy([]);
 
         /** @var AdminUrlGenerator $adminUrlGenerator */
         $adminUrlGenerator = $client->getContainer()->get(AdminUrlGenerator::class);
@@ -82,7 +86,7 @@ final class DesignerTest extends WebTestCase
             $adminUrlGenerator
                 ->setController(DesignerCrudController::class)
                 ->setAction(Action::DETAIL)
-                ->setEntityId($graphicStyle->getId())
+                ->setEntityId($designer->getId())
                 ->generateUrl()
         );
 
@@ -91,7 +95,7 @@ final class DesignerTest extends WebTestCase
             $adminUrlGenerator
                 ->setController(DesignerCrudController::class)
                 ->setAction(Action::DELETE)
-                ->setEntityId($graphicStyle->getId())
+                ->setEntityId($designer->getId())
                 ->generateUrl(),
             ['token' => $crawler->filter('form#delete-form input')->attr('value')]
         );
@@ -100,6 +104,6 @@ final class DesignerTest extends WebTestCase
 
         $client->followRedirect();
 
-        $this->assertNull($entityManager->find(Designer::class, $graphicStyle->getId()));
+        $this->assertNull($entityManager->find(Designer::class, $designer->getId()));
     }
 }
