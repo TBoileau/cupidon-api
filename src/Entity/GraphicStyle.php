@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use DateTimeImmutable;
 use Doctrine\ORM\Mapping\Column;
@@ -36,6 +37,7 @@ class GraphicStyle implements Stringable
     #[Column]
     #[NotBlank]
     #[Groups('read')]
+    #[ApiProperty(iri: 'http://schema.org/contentUrl')]
     private string $name;
 
     #[Column(nullable: true)]

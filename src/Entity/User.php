@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiProperty;
+use DateTimeImmutable;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\DiscriminatorColumn;
 use Doctrine\ORM\Mapping\DiscriminatorMap;
@@ -14,11 +15,16 @@ use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\ManyToOne;
 use Doctrine\ORM\Mapping\Table;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\NotNull;
 use Symfony\Component\Validator\Constraints\Url;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
+/**
+ * @Vich\Uploadable()
+ */
 #[Entity]
 #[InheritanceType('SINGLE_TABLE')]
 #[DiscriminatorColumn(name: 'discr', type: 'string')]
@@ -55,6 +61,16 @@ abstract class User extends BaseUser
     #[Url]
     #[Groups(['profile', 'register'])]
     protected ?string $twitter = null;
+
+    #[Column(nullable: true)]
+    #[ApiProperty(iri: 'http://schema.org/contentUrl')]
+    protected ?string $avatar = null;
+
+    /**
+     * @Vich\UploadableField(mapping="avatar", fileNameProperty="avatar")
+     */
+    #[Groups(['avatar'])]
+    protected ?File $file = null;
 
     public function getLevel(): Level
     {
@@ -112,5 +128,26 @@ abstract class User extends BaseUser
     public function setTwitter(?string $twitter): void
     {
         $this->twitter = $twitter;
+    }
+
+    public function getAvatar(): ?string
+    {
+        return $this->avatar;
+    }
+
+    public function setAvatar(?string $avatar): void
+    {
+        $this->avatar = $avatar;
+    }
+
+    public function getFile(): ?File
+    {
+        return $this->file;
+    }
+
+    public function setFile(?File $file): void
+    {
+        $this->file = $file;
+        $this->updatedAt = new DateTimeImmutable();
     }
 }

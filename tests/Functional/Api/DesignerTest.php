@@ -9,6 +9,7 @@ use App\Entity\Designer;
 use App\Entity\GraphicStyle;
 use App\Entity\Level;
 use Doctrine\ORM\EntityRepository;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 final class DesignerTest extends ApiTestCase
 {
@@ -37,5 +38,32 @@ final class DesignerTest extends ApiTestCase
             ->getRepository(Designer::class);
 
         $this->assertNotNull($designerRepository->findOneBy(['email' => 'designer+2@email.com']));
+    }
+
+    public function testIfAvatarIsUpdated(): void
+    {
+        $client = static::createAuthenticatedClient('designer+1@email.com');
+
+        copy(
+            __DIR__.'/../../../public/uploads/avatar/image.png',
+            __DIR__.'/../../../public/uploads/avatar/image_test.png'
+        );
+
+        $client->request('POST', '/api/designers/avatar', [
+            'headers' => ['Content-Type' => 'multipart/form-data'],
+            'extra' => [
+                'files' => [
+                    'file' => new UploadedFile(
+                        __DIR__.'/../../../public/uploads/avatar/image_test.png',
+                        'image.png',
+                        'image/png',
+                        null,
+                        true
+                    ),
+                ],
+            ],
+        ]);
+
+        $this->assertResponseStatusCodeSame(204);
     }
 }

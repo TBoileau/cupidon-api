@@ -47,9 +47,13 @@ abstract class BaseUser implements UserInterface, PasswordAuthenticatedUserInter
     #[Groups(['profile', 'register'])]
     protected string $lastName;
 
+    #[Column(type: 'datetime_immutable')]
+    protected DateTimeImmutable $updatedAt;
+
     public function __construct()
     {
         $this->registeredAt = new DateTimeImmutable();
+        $this->updatedAt = new DateTimeImmutable();
     }
 
     public function getId(): ?int
