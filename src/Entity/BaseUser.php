@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use DateTimeImmutable;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\GeneratedValue;
 use Doctrine\ORM\Mapping\Id;
@@ -19,6 +20,9 @@ abstract class BaseUser implements UserInterface, PasswordAuthenticatedUserInter
     #[Column(type: 'integer')]
     #[GeneratedValue]
     protected ?int $id = null;
+
+    #[Column(type: 'datetime_immutable')]
+    protected DateTimeImmutable $registeredAt;
 
     #[Column(unique: true)]
     #[NotBlank]
@@ -43,9 +47,19 @@ abstract class BaseUser implements UserInterface, PasswordAuthenticatedUserInter
     #[Groups(['profile', 'register'])]
     protected string $lastName;
 
+    public function __construct()
+    {
+        $this->registeredAt = new DateTimeImmutable();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getRegisteredAt(): DateTimeImmutable
+    {
+        return $this->registeredAt;
     }
 
     public function getEmail(): string
