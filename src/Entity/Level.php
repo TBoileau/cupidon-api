@@ -10,6 +10,7 @@ use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\GeneratedValue;
 use Doctrine\ORM\Mapping\Id;
 use Doctrine\ORM\Mapping\Table;
+use Stringable;
 
 #[ApiResource(
     collectionOperations: ['get'],
@@ -17,7 +18,7 @@ use Doctrine\ORM\Mapping\Table;
 )]
 #[Entity]
 #[Table(name: '`level`')]
-class Level
+class Level implements Stringable
 {
     #[Id]
     #[Column(type: 'integer')]
@@ -29,6 +30,11 @@ class Level
 
     #[Column(type: 'text')]
     protected string $description;
+
+    public function __toString(): string
+    {
+        return $this->name;
+    }
 
     public function getId(): ?int
     {

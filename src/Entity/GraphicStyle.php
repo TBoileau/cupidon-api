@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\GeneratedValue;
 use Doctrine\ORM\Mapping\Id;
+use Stringable;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
 #[ApiResource(
@@ -16,7 +17,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
     itemOperations: ['get'],
 )]
 #[Entity]
-class GraphicStyle
+class GraphicStyle implements Stringable
 {
     #[Id]
     #[Column(type: 'integer')]
@@ -26,6 +27,11 @@ class GraphicStyle
     #[Column]
     #[NotBlank]
     protected string $name;
+
+    public function __toString(): string
+    {
+        return $this->name;
+    }
 
     public function getId(): ?int
     {
