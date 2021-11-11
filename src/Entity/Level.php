@@ -23,13 +23,13 @@ class Level implements Stringable
     #[Id]
     #[Column(type: 'integer')]
     #[GeneratedValue]
-    protected ?int $id = null;
+    private ?int $id = null;
 
     #[Column]
-    protected string $name;
+    private string $name;
 
     #[Column(type: 'text')]
-    protected string $description;
+    private string $description;
 
     public function __toString(): string
     {
