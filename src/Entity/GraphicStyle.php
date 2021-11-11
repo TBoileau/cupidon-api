@@ -12,6 +12,7 @@ use Doctrine\ORM\Mapping\GeneratedValue;
 use Doctrine\ORM\Mapping\Id;
 use Stringable;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
@@ -21,6 +22,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 #[ApiResource(
     collectionOperations: ['get'],
     itemOperations: ['get'],
+    normalizationContext: ['groups' => ['read']],
 )]
 #[Entity]
 class GraphicStyle implements Stringable
@@ -28,13 +30,16 @@ class GraphicStyle implements Stringable
     #[Id]
     #[Column(type: 'integer')]
     #[GeneratedValue]
+    #[Groups('read')]
     private ?int $id = null;
 
     #[Column]
     #[NotBlank]
+    #[Groups('read')]
     private string $name;
 
     #[Column(nullable: true)]
+    #[Groups('read')]
     private ?string $filename = null;
 
     /**
