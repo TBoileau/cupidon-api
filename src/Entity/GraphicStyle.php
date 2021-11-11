@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use DateTimeImmutable;
 use Doctrine\ORM\Mapping\Column;
@@ -36,11 +37,14 @@ class GraphicStyle implements Stringable
     #[Column]
     #[NotBlank]
     #[Groups('read')]
+    #[ApiProperty(iri: 'http://schema.org/contentUrl')]
     private string $name;
 
     #[Column(nullable: true)]
-    #[Groups('read')]
     private ?string $filename = null;
+
+    #[Groups('read')]
+    private ?string $url = null;
 
     /**
      * @Vich\UploadableField(mapping="graphic_style", fileNameProperty="filename")
@@ -94,5 +98,15 @@ class GraphicStyle implements Stringable
     {
         $this->file = $file;
         $this->updatedAt = new DateTimeImmutable();
+    }
+
+    public function getUrl(): ?string
+    {
+        return $this->url;
+    }
+
+    public function setUrl(?string $url): void
+    {
+        $this->url = $url;
     }
 }
