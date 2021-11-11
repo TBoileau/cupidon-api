@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 namespace App\Tests\Functional\Admin;
 
-use App\Controller\Admin\DesignerCrudController;
+use App\Controller\Admin\DeveloperCrudController;
 use App\Entity\Administrator;
-use App\Entity\Designer;
+use App\Entity\Developer;
 use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-final class DesignerTest extends WebTestCase
+final class DeveloperTest extends WebTestCase
 {
-    public function testIfDesignersAreListed(): void
+    public function testIfDevelopersAreListed(): void
     {
         $client = static::createClient();
 
@@ -29,7 +29,7 @@ final class DesignerTest extends WebTestCase
         $crawler = $client->request(
             'GET',
             $adminUrlGenerator
-                ->setController(DesignerCrudController::class)
+                ->setController(DeveloperCrudController::class)
                 ->setAction(Action::INDEX)
                 ->generateUrl()
         );
@@ -39,7 +39,7 @@ final class DesignerTest extends WebTestCase
         $this->assertCount(1, $crawler->filter('article.content table tbody tr'));
     }
 
-    public function testIfDesignerIsShown(): void
+    public function testIfDeveloperIsShown(): void
     {
         $client = static::createClient();
 
@@ -49,32 +49,32 @@ final class DesignerTest extends WebTestCase
         /** @var AdminUrlGenerator $adminUrlGenerator */
         $adminUrlGenerator = $client->getContainer()->get(AdminUrlGenerator::class);
 
-        /** @var Designer $developer */
-        $designer = $entityManager->getRepository(Designer::class)->findOneBy([]);
+        /** @var Developer $developer */
+        $developer = $entityManager->getRepository(Developer::class)->findOneBy([]);
 
         $client->loginUser($entityManager->find(Administrator::class, 1), 'admin');
 
         $client->request(
             'GET',
             $adminUrlGenerator
-                ->setController(DesignerCrudController::class)
+                ->setController(DeveloperCrudController::class)
                 ->setAction(Action::DETAIL)
-                ->setEntityId($designer->getId())
+                ->setEntityId($developer->getId())
                 ->generateUrl()
         );
 
         $this->assertResponseIsSuccessful();
     }
 
-    public function testIfDesignerIsDeleted(): void
+    public function testIfDeveloperIsDeleted(): void
     {
         $client = static::createClient();
 
         /** @var EntityManagerInterface $entityManager */
         $entityManager = $client->getContainer()->get('doctrine.orm.entity_manager');
 
-        /** @var Designer $developer */
-        $designer = $entityManager->getRepository(Designer::class)->findOneBy([]);
+        /** @var Developer $developer */
+        $developer = $entityManager->getRepository(Developer::class)->findOneBy([]);
 
         /** @var AdminUrlGenerator $adminUrlGenerator */
         $adminUrlGenerator = $client->getContainer()->get(AdminUrlGenerator::class);
@@ -84,18 +84,18 @@ final class DesignerTest extends WebTestCase
         $crawler = $client->request(
             'GET',
             $adminUrlGenerator
-                ->setController(DesignerCrudController::class)
+                ->setController(DeveloperCrudController::class)
                 ->setAction(Action::DETAIL)
-                ->setEntityId($designer->getId())
+                ->setEntityId($developer->getId())
                 ->generateUrl()
         );
 
         $client->request(
             'POST',
             $adminUrlGenerator
-                ->setController(DesignerCrudController::class)
+                ->setController(DeveloperCrudController::class)
                 ->setAction(Action::DELETE)
-                ->setEntityId($designer->getId())
+                ->setEntityId($developer->getId())
                 ->generateUrl(),
             ['token' => $crawler->filter('form#delete-form input')->attr('value')]
         );
@@ -104,6 +104,6 @@ final class DesignerTest extends WebTestCase
 
         $client->followRedirect();
 
-        $this->assertNull($entityManager->find(Designer::class, $designer->getId()));
+        $this->assertNull($entityManager->find(Developer::class, $developer->getId()));
     }
 }

@@ -4,21 +4,21 @@ declare(strict_types=1);
 
 namespace App\Controller\Admin;
 
-use App\Entity\Designer;
+use App\Entity\Developer;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 
-final class DesignerCrudController extends UserCrudController
+final class DeveloperCrudController extends UserCrudController
 {
     public static function getEntityFqcn(): string
     {
-        return Designer::class;
+        return Developer::class;
     }
 
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
-            ->setEntityLabelInSingular('Designer')
-            ->setEntityLabelInPlural('Designers')
+            ->setEntityLabelInSingular('Développeur')
+            ->setEntityLabelInPlural('Développeurs')
             ->setDefaultSort(['registeredAt' => 'DESC']);
     }
 }
