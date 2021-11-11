@@ -12,6 +12,7 @@ use PhpCsFixer\Fixer\ReturnNotation\ReturnAssignmentFixer;
 use SlevomatCodingStandard\Sniffs\Classes\SuperfluousAbstractClassNamingSniff;
 use SlevomatCodingStandard\Sniffs\ControlStructures\DisallowYodaComparisonSniff;
 use SlevomatCodingStandard\Sniffs\Functions\UnusedParameterSniff;
+use SlevomatCodingStandard\Sniffs\TypeHints\DisallowMixedTypeHintSniff;
 use SlevomatCodingStandard\Sniffs\TypeHints\ParameterTypeHintSniff;
 
 return [
@@ -74,6 +75,7 @@ return [
         DisallowYodaComparisonSniff::class,
         ComposerMustBeValid::class,
         SuperfluousAbstractClassNamingSniff::class,
+        DisallowMixedTypeHintSniff::class
     ],
 
     'config' => [
@@ -108,11 +110,12 @@ return [
             'ignoreComments' => true,
         ],
         CyclomaticComplexityIsHigh::class => [
-            'maxComplexity' => 4,
+            'maxComplexity' => 5,
         ],
         UnusedParameterSniff::class => [
             'exclude' => [
                 'src/DataPersister/UserDataPersister.php',
+                'src/Normalizer',
                 'src/Controller',
             ],
         ],
